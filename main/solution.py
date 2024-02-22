@@ -1,12 +1,59 @@
+
+# import libraries
+import numpy as np
+import random
+# PyTorch Imports
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch.optim as optim
 
-class MyConvModel(nn.Module):
-    def __init__(self, time_periods, n_sensors, n_classes):
-        super(MyConvModel, self).__init__()
+class mlp(object):
+
+  def __init__(self,
+               time_periods, n_classes):
+        super(mlp, self).__init__()
+        self.time_periods = time_periods
+        self.n_classes = n_classes
+        # WRITE CODE HERE
+
+        # Flatten layer to reshape the input tensor
+        self.flatten = nn.Flatten()
+
+        # Fully connected layers with ReLU activation
+        self.fc1 = nn.Linear(time_periods*3, 100)
+        self.relu1 = nn.ReLU()
+
+        self.fc2 = nn.Linear(100, 100)
+        self.relu2 = nn.ReLU()
+
+        self.fc3 = nn.Linear(100, 100)
+        self.relu3 = nn.ReLU()
+
+        # Final fully connected layer without activation for classification
+        self.fc4 = nn.Linear(100, n_classes)
+
+  def forward(self, x):
+    # WRITE CODE HERE
+    x = self.flatten(x)
+    x = self.relu1(self.fc1(x))
+    x = self.relu2(self.fc2(x))
+    x = self.relu3(self.fc3(x))
+    x = self.fc4(x)
+    x = F.softmax(x, dim=1)
+    return x
+  
+# # WRITE CODE HERE
+
+class cnn(object):
+
+  def __init__(self, time_periods, n_sensors, n_classes):
+        super(cnn, self).__init__()
         self.time_periods = time_periods
         self.n_sensors = n_sensors
         self.n_classes = n_classes
+
+        # WRITE CODE HERE
 
         # Convolutional layers
         self.conv1 = nn.Conv1d(self.n_sensors, 100, kernel_size=10)
@@ -30,19 +77,17 @@ class MyConvModel(nn.Module):
 
         # Fully connected layer
         self.fc = nn.Linear(160, n_classes)
+        
 
-        #raise NotImplementedError
-
-    #def get_targets(self, x):
-    #  for batch in x:
-    #    _, targets = batch
-    #  return targets
-
-    def forward(self, x):
+  def forward(self, x):
         # Reshape the input to (batch_size, n_sensors, time_periods)
+        # WRITE CODE HERE
         x_batch_size = x.size(0)
         x = x.reshape(x_batch_size, self.n_sensors, self.time_periods)
-
+        
+        # Layers
+        # WRITE CODE HERE
+        
         # Convolutional layers with ReLU activations
         x = self.relu1(self.conv1(x))
         x = self.relu2(self.conv2(x))
@@ -65,5 +110,5 @@ class MyConvModel(nn.Module):
         #targets = self.get_targets(x)
         #loss = F.nll_loss(x, targets)
         return x
-
-        #raise NotImplementedError
+        
+        return x
