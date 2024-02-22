@@ -8,7 +8,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 
-class mlp(object):
+class mlp(nn.Module):
 
   def __init__(self,
                time_periods, n_classes):
@@ -45,7 +45,7 @@ class mlp(object):
   
 # # WRITE CODE HERE
 
-class cnn(object):
+class cnn(nn.Module):
 
   def __init__(self, time_periods, n_sensors, n_classes):
         super(cnn, self).__init__()
