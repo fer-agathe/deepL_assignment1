@@ -40,7 +40,8 @@ class mlp(nn.Module):
     x = self.relu2(self.fc2(x))
     x = self.relu3(self.fc3(x))
     x = self.fc4(x)
-    x = F.softmax(x, dim=1)
+    x = F.log_softmax(x, dim=1)
+    #x = F.softmax(x, dim=1)
     return x
   
 # # WRITE CODE HERE
@@ -109,6 +110,4 @@ class cnn(nn.Module):
         x = F.log_softmax(x, dim=1)
         #targets = self.get_targets(x)
         #loss = F.nll_loss(x, targets)
-        return x
-        
         return x
