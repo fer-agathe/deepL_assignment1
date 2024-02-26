@@ -13,6 +13,7 @@
 !template.latex
 
 !results_MLP_hyperparam.csv
+!results_CNN_hyperparam.csv
 
 !*.py
 
