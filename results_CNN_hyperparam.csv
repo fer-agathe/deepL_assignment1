@@ -1,4 +1,4 @@
-0,1,2,3,4,5,6
+nb_conv_layer, activation_function, pooling, kernel_size, stride, accuracy_train, accuracy_val
 3,LeakyReLU(negative_slope=0.01),avg,5,1,0.9958667784832874,0.9889793962625779
 5,ReLU(),max,5,1,0.9996405894333293,0.9896981312889315
 5,LeakyReLU(negative_slope=0.01),avg,5,1,0.9976638313166407,0.9908960229995208
